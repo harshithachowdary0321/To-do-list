@@ -1,0 +1,50 @@
+class ToDoList:
+    def __init__(self):
+        self.tasks = []
+
+    def add_task(self, task):
+        self.tasks.append({"task": task, "completed": False})
+
+    def mark_completed(self, task_index):
+        if 0 <= task_index < len(self.tasks):
+            self.tasks[task_index]["completed"] = True
+            print(f'Task "{self.tasks[task_index]["task"]}" marked as completed.')
+        else:
+            print("Invalid task index.")
+
+    def update_task_description(self, task_index, new_description):
+        if 0 <= task_index < len(self.tasks):
+            self.tasks[task_index]["task"] = new_description
+            print(f'Task description updated: "{new_description}"')
+        else:
+            print("Invalid task index.")
+
+    def remove_task(self, task_index):
+        if 0 <= task_index < len(self.tasks):
+            removed_task = self.tasks.pop(task_index)
+            print(f'Task "{removed_task["task"]}" removed from the list.')
+        else:
+            print("Invalid task index.")
+
+    def display_tasks(self):
+        if not self.tasks:
+            print("No tasks in the list.")
+        else:
+            print("To-Do List:")
+            for index, task in enumerate(self.tasks):
+                status = "Completed" if task["completed"] else "Pending"
+                print(f'{index + 1}. [{status}] {task["task"]}')
+
+
+# Example usage:
+todo_list = ToDoList()
+todo_list.add_task("Buy groceries")
+todo_list.add_task("Finish coding assignment")
+todo_list.display_tasks()
+
+todo_list.mark_completed(1)
+todo_list.update_task_description(2, "Submit project proposal")
+todo_list.display_tasks()
+
+todo_list.remove_task(1)
+todo_list.display_tasks()
